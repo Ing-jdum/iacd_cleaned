@@ -313,7 +313,8 @@ class NaiveBayes:
         self.classes, self.class_count = np.unique(y, return_counts=True)
         self.priors = self.class_count / sum(self.class_count)
         # Aplana un array 2d y el valor en cada posicion corresponde a la cantidad de valores unicos de cada columna
-        self.unique_feature_count = np.apply_along_axis(lambda col: len(np.unique(col)), axis=0, arr=X)
+        # Aplana un array 2d y el valor en cada posición corresponde a la cantidad de valores únicos de cada columna
+        self.unique_feature_count = np.array([len(np.unique(X[:, col])) for col in range(X.shape[1])])
 
     def clasifica_prob(self, ejemplo: np.ndarray) -> dict:
         """
